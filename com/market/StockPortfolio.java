@@ -1,30 +1,37 @@
 package com.market;
 
+import java.util.List;
+import java.util.Map;
+
+
 public class StockPortfolio {
 	String stockName;
 	int numberOfShare;
 	double sharePrice;
-	static double totalStockValue = 0;
+	double totalStockValue = 0;
+	static double balance;
+	double value ;
+	static double investedAmount;
 	
-	public StockPortfolio(String stockName, int numberOfShare, int sharePrice) {
+	Account account = new Account();
+	Calculate calculate = new Calculate();
+	
+	public StockPortfolio(String stockName, int numberOfShare, double sharePrice) {
 		this.stockName = stockName;
 		this.numberOfShare = numberOfShare;
-		this.sharePrice = sharePrice;
-	
-	}
-	
-	@Override
-	public String toString() {
-		eachStockValue(numberOfShare, sharePrice);
-		return "stockName=" + stockName + ",\n numberOfShare=" + numberOfShare + ",\n sharePrice="
-				+ sharePrice + ",\n totalStockValue=" + totalStockValue;
+		this.sharePrice = sharePrice;	
 	}
 
-	public double eachStockValue(int number, double price) {
-		double value;
-		value = number * price; 
-		totalStockValue = totalStockValue + value;
-		return value;
+	public void storedata() {
+		totalStockValue = calculate.eachStockValue(numberOfShare, sharePrice);
+		balance = account.bal(totalStockValue);
+		account.store(stockName, numberOfShare, sharePrice);
 	}
 
+
+
+
+	
+	
+	
 }
